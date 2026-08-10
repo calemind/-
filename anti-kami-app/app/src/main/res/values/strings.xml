@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">アンチ神アプリ</string>
+    <string name="service_description">グループに登録したアプリの合計使用時間を監視し、上限を超えたら起動をブロックします。データは端末内にのみ保存され、通信は一切行いません。</string>
+</resources>
