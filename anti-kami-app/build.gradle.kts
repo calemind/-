@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application") version "8.5.2" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.24" apply false
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -33,4 +33,3 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
 }
-
