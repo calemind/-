@@ -188,7 +188,7 @@ class GuardService : AccessibilityService() {
     private val ticker = object : Runnable {
         override fun run() {
             check()
-            handler.postDelayed(this, 15_000L)
+            handler.postDelayed(this, 3_000L)
         }
     }
 
@@ -203,7 +203,6 @@ class GuardService : AccessibilityService() {
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
         val pkg = event.packageName?.toString() ?: return
         if (pkg == packageName) return
-        if (pkg == currentPkg) return
         currentPkg = pkg
         warnedGroupId = null
         check()
@@ -228,8 +227,11 @@ class GuardService : AccessibilityService() {
         val limit = g.minutes * 60_000L
 
         if (used >= limit) {
-            performGlobalAction(GLOBAL_ACTION_HOME)
             showBlock(g, used)
+            performGlobalAction(GLOBAL_ACTION_HOME)
+            handler.postDelayed({ performGlobalAction(GLOBAL_ACTION_HOME) }, 300L)
+            handler.postDelayed({ performGlobalAction(GLOBAL_ACTION_HOME) }, 800L)
+            handler.postDelayed({ performGlobalAction(GLOBAL_ACTION_HOME) }, 1500L)
         } else {
             val leftMin = ((limit - used) / 60_000L).toInt()
             if (leftMin <= 5 && warnedGroupId != g.id) {
